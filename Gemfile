@@ -1,37 +1,25 @@
 source "https://rubygems.org"
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve
-#
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
-gem "jekyll", "~> 4.4.1"
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.5"
-
-# Use GitHub Pages
-# This will automatically use the right versions of all dependencies
-# Comment out the individual jekyll and minima gems above when using this
+# This is the recommended setup for GitHub Pages
+# It will automatically use compatible versions of all dependencies
 gem "github-pages", group: :jekyll_plugins
+
+# If you want to use a specific Jekyll version, uncomment the line below
+# and comment out the github-pages line above
+# gem "jekyll", "~> 4.3.2"
+# gem "minima", "~> 2.5"
+
+# Lock the Ruby version
+ruby "~> 3.0.0"
 
 # Plugins
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.12"
-  gem "jekyll-seo-tag"  # For better SEO
+  gem "jekyll-feed"
+  gem "jekyll-seo-tag"
 end
 
-# Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
-# and associated library.
-platforms :mingw, :x64_mingw, :mswin, :jruby do
-  gem "tzinfo", ">= 1", "< 3"
-  gem "tzinfo-data"
+# Platform-specific gems
+platforms :jruby do
+  # JRuby-specific gems
+  gem "tzinfo"
+  gem "http_parser.rb", "~> 0.6.0"  # Required for webrick on JRuby
 end
-
-# Performance-booster for watching directories on Windows
-gem "wdm", "~> 0.1", :platforms => [:mingw, :x64_mingw, :mswin]
-
-# Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
-# do not have a Java counterpart.
-gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]

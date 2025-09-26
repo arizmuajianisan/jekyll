@@ -20,13 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'  # Using Ruby 3.0 for better compatibility
+          ruby-version: '3.0'
           bundler-cache: true
+          cache-version: 1  # Bump this if you update your dependencies
+
+      - name: Debug Ruby and Bundler versions
+        run: |
+          ruby -v
+          gem -v
+          bundle -v
 
       - name: Install dependencies
         run: |
